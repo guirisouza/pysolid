@@ -1,25 +1,25 @@
-from typing import List
+from typing import List, Dict
 
 
 class Cart:
-    def __init__(self, status: str = "aberto", items: List = []) -> None:
-        self.items = items
-        self.status = status
-        self.total_value = 0
+    def __init__(self, status: str = "open", items: List[Dict] = []) -> None:
+        self.items: List = items
+        self.status: str = status
+        self.total_value: float = 0
+
+    def add_item(self, item: str, value: float) -> None:
+        self.items.append({"name": item, "value": value})
+        self.total_value += value
 
     def get_items(self) -> List:
         return self.items
 
     def validate_item(self, item: dict) -> bool:
-        if not item.get('name'):
+        if not item.get('name') or not item.get('value'):
             return False
         if item.get('value') <= 0:
             return False
         return True
-
-    def add_item(self, item: str, value: float):
-        self.items.append({"name": item, "value": value})
-        self.total_value += value
 
     def get_total_value(self) -> float:
         return self.total_value
@@ -28,16 +28,15 @@ class Cart:
         return self.status
 
     def confirm_order(self):
-        if self.validate_cart():
-            self.status = "confirmado"
+        if self.validate():
+            self.status = "confirmed"
             self.send_confirm_email()
-            return True
 
-        print("não há nenhum item no carrinho")
+        print("There are no items in the cart")
         return False
 
     def send_confirm_email(self):
-        print('...email enviado: pedido confirmado')
+        print('...Email Sent: order confirmed')
 
-    def validate_cart(self) -> bool:
+    def validate(self) -> bool:
         return len(self.items) > 0

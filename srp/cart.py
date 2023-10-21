@@ -4,8 +4,8 @@ from item import Item
 
 
 class Cart:
-    def __init__(self, items: List = []) -> None:
-        self.items = items
+    def __init__(self, items: List[Item] = []) -> None:
+        self.items: List[Item] = items
 
     def get_items(self) -> List:
         return self.items

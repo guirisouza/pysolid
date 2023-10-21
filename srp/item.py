@@ -1,9 +1,10 @@
+from typing import Union
 
 
 class Item:
-    def __init__(self, description: str = "", value: float = 0):
-        self.description = description
-        self.value = value
+    def __init__(self, description: str = "", value: float = 0) -> None:
+        self.description: str = description
+        self.value: float = value
 
     def __repr__(self):
         return  f"[{self.description} | {self.value}]"
@@ -24,15 +25,11 @@ class Item:
     def get_value(self) -> float:
         return self.value
 
-    def set_description(self, description: str) -> bool:
+    def set_description(self, description: str) -> None:
         if not isinstance(description, str):
-            print('o nome do item precisa ser string')
-            return False
-        if len(description) < 4:
-            print('item deve ser maior que 4 letras')
-            return False
+            print('Description must be an string')
+            return
         self.description = description
-        return True
 
     def set_value(self, value: float) -> bool:
         if not isinstance(value, float):

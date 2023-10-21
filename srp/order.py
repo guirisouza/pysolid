@@ -1,9 +1,9 @@
 from cart import Cart
 
 class Order:
-    def __init__(self, cart: Cart, status: str = "aberto",):
-        self.cart = cart
-        self.status = status
+    def __init__(self, cart: Cart, status: str = "open"):
+        self.cart: Cart = cart
+        self.status: str = status
 
     def get_cart(self) -> Cart:
         return self.cart
@@ -14,8 +14,8 @@ class Order:
     def set_status(self, status: str) -> None:
         self.status = status
 
-    def confirm(self):
+    def confirm(self) -> bool:
         if self.cart.validate():
-            self.set_status(status='confirmado')
+            self.set_status(status='confirmed')
             return True
         return False

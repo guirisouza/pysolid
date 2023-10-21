@@ -1,7 +1,6 @@
 from item import Item
 from cart import Cart
 from order import Order
-from email_service import EmailService
 
 cart: Cart = Cart()
 order: Order = Order(cart=cart)
