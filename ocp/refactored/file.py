@@ -16,3 +16,6 @@ class File:
 
     def get_data(self):
         return self.data
+
+    def read_file(self, file_path: str) -> List:
+        pass

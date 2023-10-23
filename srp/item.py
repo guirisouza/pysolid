@@ -1,4 +1,3 @@
-from typing import Union
 
 
 class Item:
@@ -31,8 +30,8 @@ class Item:
             return
         self.description = description
 
-    def set_value(self, value: float) -> bool:
+    def set_value(self, value: float) -> None:
         if not isinstance(value, float):
-            return False
+            print('Value must be an float type')
+            return
         self.value = value
-        return True

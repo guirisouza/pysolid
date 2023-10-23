@@ -1,4 +1,5 @@
 from cart import Cart
+from email_service import EmailService
 
 class Order:
     def __init__(self, cart: Cart, status: str = "open"):
@@ -17,5 +18,9 @@ class Order:
     def confirm(self) -> bool:
         if self.cart.validate():
             self.set_status(status='confirmed')
+            EmailService.send(
+                subject="Order Confirmed",
+                content="Dear, cliente. Your order was confirmed"
+            )
             return True
         return False

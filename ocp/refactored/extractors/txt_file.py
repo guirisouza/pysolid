@@ -1,9 +1,9 @@
 from typing import List
 
-from file import File
+from ocp.refactored.file import File
 
 
-class Txt(File):
+class TxtFile(File):
 
     def read_file(self, file_path: str) -> List:
 

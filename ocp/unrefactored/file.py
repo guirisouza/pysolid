@@ -15,7 +15,6 @@ class File:
             }
         )
 
-
     def read_csv_file(self, file_path: str) -> List:
 
         with open(file_path, "rt", encoding='iso-8859-1') as file:

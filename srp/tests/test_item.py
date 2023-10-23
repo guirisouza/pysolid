@@ -18,24 +18,26 @@ def test_initial_state_item():
 )
 def test_correct_get_set_item_description(description, expected):
     item = Item()
-    assert item.set_description(description=description) is True
+    assert item.set_description(description=description) is None
     assert item.get_description() == expected
 
 
 def test_wrong_data_type_set_item_description():
     item = Item()
-    assert item.set_description(description=123) is False
+    assert item.set_description(description=123) is None
+    assert item.get_description() == ""
 
 
 def test_correct_get_set_item_value():
     item = Item()
-    assert item.set_description(description='Wood Chair') is True
+    assert item.set_description(description='Wood Chair') is None
     assert item.get_description() == 'Wood Chair'
 
 
 def test_wrong_data_type_set_item_value():
     item = Item()
-    assert item.set_value(value='123') is False
+    assert item.set_value(value='123') is None
+    assert item.get_value() == 0
 
 
 def test_valid_item():

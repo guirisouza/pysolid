@@ -1,7 +1,9 @@
-from typing import Dict, List
+from typing import List
+import importlib
+import inspect
 
-from csv_file import CsvFile
-from txt import Txt
+from ocp.refactored.file import File
+
 
 class FileReader():
     def __init__(self):
@@ -17,14 +19,22 @@ class FileReader():
     def set_file(self, file: str) -> None:
         self._file = file
 
+    def _import_extractor_by_file_extension(self, file_ext: str) -> File:
+        extractor_module = importlib.import_module(f'extractors.{file_ext}_file')
+        classes = inspect.getmembers(extractor_module, inspect.isclass)
+
+        extractor = None
+
+        for cls in classes:
+            if cls[0] == f"{file_ext.title()}File":
+                extractor = cls[1]()
+
+        if extractor:
+            return extractor
+
     def read_file(self) -> List:
         file_ext = self._file_path.split('.')[-1]
 
-        return {
-            "txt": Txt(),
-            "csv": CsvFile()
-        }.get(file_ext).read_file(file_path=self._file_path)
+        extractor = self._import_extractor_by_file_extension(file_ext=file_ext)
 
-
-
-
+        return extractor.read_file(file_path=self._file_path)
