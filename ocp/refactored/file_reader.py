@@ -29,12 +29,10 @@ class FileReader():
             if cls[0] == f"{file_ext.title()}File":
                 extractor = cls[1]()
 
-        if extractor:
-            return extractor
+        return extractor
 
     def read_file(self) -> List:
         file_ext = self._file_path.split('.')[-1]
+        extractor_file = self._import_extractor_by_file_extension(file_ext=file_ext)
 
-        extractor = self._import_extractor_by_file_extension(file_ext=file_ext)
-
-        return extractor.read_file(file_path=self._file_path)
+        return extractor_file.read_file(file_path=self._file_path)
